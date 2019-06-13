@@ -1,14 +1,16 @@
 #include "main.h"
-#define V_SIZE (10)
-#define RAND_ORDER (V_SIZE * 1000000) //for numbers < 1000
+
+static const
+	int V_SIZE = 10,
+	int RAND_ORDER = (V_SIZE * 1000000); //for numbers < 1000
 
 String
-unsorted = "ibgehacfdj",
-expected_sorted = "abcdefghij",
-one_char_string = "aaaaaaaaaa",
-zeros_string = "\0\0\0\0\0\0\0\0\0\0",
-zeros_ones_string = "a\0a\0a\0a\0a\0",
-sorted_zeros_ones_string = "a";
+	unsorted = "ibgehacfdj",
+	expected_sorted = "abcdefghij",
+	one_char_string = "aaaaaaaaaa",
+	zeros_string = "\0\0\0\0\0\0\0\0\0\0",
+	zeros_ones_string = "a\0a\0a\0a\0a\0",
+	sorted_zeros_ones_string = "a";
 
 inline void print_vector(String & data){
 	String::iterator current = data.begin();
@@ -56,22 +58,22 @@ TEST(sort_test, sort_zeros_ones_vector){
 TEST(file_test,file_write){
     String raw = unsorted;
     std::ifstream f;
-    f.open("C:\\Documents\\programming\\file.cpp", std::ios::in);
+    f.open(TEST_PATH, std::ios::in);
     ASSERT_TRUE( f.is_open() ) << "Cat open file" ;
    
 }
 
 TEST(file_test,file_read){
-    String raw =expected_sorted;
+    String raw = expected_sorted;
     std::ofstream f;
-    f.open("C:\\Documents\\programming\\file.cpp", std::ios::out);
+    f.open(TEST_PATH, std::ios::out);
     ASSERT_TRUE(f.is_open()) << "Cat open file" ;
 }
 	   
 TEST(main_test, sort_files){
 	String raw = unsorted;
 	std::ifstream f;
-	f.open("C:\\Documents\\programming\\file.cpp", std::ios::in);
+	f.open(TEST_PATH, std::ios::in);
 	f>>raw;
 	qsort_recursive(raw);
 	ASSERT_TRUE(raw == expected_sorted);

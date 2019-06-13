@@ -32,35 +32,33 @@ void qsort_recursive(String & raw) {
 	internal_qsort_recursive(raw.begin(), raw.end() - 1);
 }
 
-#define TEST_PATH "C:\\Documents\\programming\\cpp.txt"
+void file_read(std::ifstream f, String & data) {
+  f.open(path_to_file, std::ios::in);//точный адрес хранения необходимого файла
+  if (f)
+    while(!f.eof())
+      f>>data;
+  else
+    std::cout <<"Error!\n";
+  f.close();
+}
+
+void file_write(std::ofstream n, String & data) {
+  n.open(path_to_file, std::ios::out);;//удаляем данные о предыдущем файле
+  if (!(n.is_open()))
+    std::cout << "File not find\n";
+  else {
+    n<<data;//перезаписываем файл
+    n.close();
+  }
+}
 
 void sort_file(char * path_to_file)
 {
   String unsorted;
   std::ifstream f;
-  f.open(path_to_file, std::ios::in);//точный адрес хранения необходимого файла
-  if (f)
-  {
-  while(!f.eof())
-    f>>unsorted;
-  }
-  else
-  { 
-    std::cout <<"Error!\n";
-  }
-  f.close();
+  file_read(f, unsorted);
   qsort_recursive(unsorted);
-  //return unsorted;
   std::ofstream n;
-  n.open(path_to_file, std::ios::out);;//удаляем данные о предыдущем файле
-  if (!(n.is_open()))
-  {
-    std::cout << "File not find\n";
-  }
-  else
-  {
-    n<<unsorted;//перезаписываем файл
-    n.close();
-  }
+  file_write(unsorted);
 }
     
