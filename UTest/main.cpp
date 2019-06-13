@@ -1,8 +1,8 @@
 #include "main.h"
 
-static const
-	int V_SIZE = 10,
-	int RAND_ORDER = (V_SIZE * 1000000); //for numbers < 1000
+static const int
+	V_SIZE = 10,
+	RAND_ORDER = (V_SIZE * 1000000); //for numbers < 1000
 
 String
 	unsorted = "ibgehacfdj",
