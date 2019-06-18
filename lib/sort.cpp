@@ -33,7 +33,8 @@ void qsort_recursive(String & raw) {
     internal_qsort_recursive(raw.begin(), raw.end() - 1);
 }
 
-void file_read(std::ifstream f, String & data) {
+void file_read(const String path_to_file, String & data) {
+	std::ifstream f;
   f.open(path_to_file, std::ios::in);//точный адрес хранения необходимого файла
   if (f)
     while(!f.eof())
@@ -43,7 +44,8 @@ void file_read(std::ifstream f, String & data) {
   f.close();
 }
 
-void file_write(std::ofstream n, String & data) {
+void file_write(const String path_to_file, String & data) {
+	std::ofstream n;
   n.open(path_to_file, std::ios::out);;//удаляем данные о предыдущем файле
   if (!(n.is_open()))
     std::cout << "File not find\n";
@@ -53,13 +55,11 @@ void file_write(std::ofstream n, String & data) {
   }
 }
 
-void sort_file(char * path_to_file)
+void sort_file(const String path_to_file)
 {
   String unsorted;
-  std::ifstream f;
-  file_read(f, unsorted);
+  file_read(TEST_PATH, unsorted);
   qsort_recursive(unsorted);
-  std::ofstream n;
-  file_write(unsorted);
+  file_write(TEST_PATH, unsorted);
 }
     
